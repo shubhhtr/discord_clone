@@ -1,19 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const dontenv = require('dotenv');
+const express = require("express");
+const cors = require("cors");
+const dontenv = require("dotenv").config();
 
-const userRouter = require('./routers/users');
+const userRouter = require("./routers/users");
+const authRouter = require("./routers/authentication");
 
-dontenv.config();
 const app = express();
-
-const PORT = process.env.PORT;
-
 app.use(express.json());
 app.use(cors());
 
-app.use('/', userRouter);
+const PORT = process.env.PORT;
+
+app.use("/", userRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
-    console.log(`Serevr started sucessfully at port ${PORT}`);
+	console.log(`Serevr started sucessfully at port ${PORT}`);
 });
