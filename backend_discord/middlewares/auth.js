@@ -11,8 +11,13 @@ const validateToken = async (req, resp, next) => {
 		//Token is mostly in the form of "Bearer vduysgfuishdvbfydbcj"
 		//To remove Bearer
 		token = token.replace(/^Bearer\s+/, ""); //????????????????????
-		const decode = jwt.verify(token, process.env.JWT_KEY);
+		const decoded = jwt.verify(token, process.env.JWT_KEY);
+		req.user = decoded;
 	} catch (err) {
 		resp.status(401).send("Invalid Token");
 	}
+
+	return next();
 };
+
+module.exports = validateToken;
