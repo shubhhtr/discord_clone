@@ -68,7 +68,7 @@ const Login = () => {
                         Need an account?
                     </span>
                     <Link
-                        to={'/registor'}
+                        to={'/register'}
                         className='registration-nav-button-sec router-link'>
                         Register
                     </Link>

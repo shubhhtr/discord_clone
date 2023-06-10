@@ -43,7 +43,7 @@
     & .text-input-box {
         display: block;
         height: 5rem;
-        width: 50%;
+        width: 96%;
         margin-top: 0.5rem;
         // margin-bottom: 2rem;
         font-size: 1.9rem;
@@ -62,7 +62,7 @@
 
     & .login-button {
         display: block;
-        width: 50%;
+        width: 96%;
         height: 5rem;
         font-size: 1.9rem;
         color: $text-color-white;
@@ -103,5 +103,32 @@
     text-decoration: none;
     &:hover {
         text-decoration: underline;
+    }
+}
+
+.dob-picker {
+    width: 96%;
+    justify-content: space-between;
+
+    & .rsd__select-container-month,
+    .rsd__select-container-day,
+    .rsd__select-container-year {
+        width: 32%;
+
+        & .rsd__select-month,
+        .rsd__select-day,
+        .rsd__select-year {
+            background-color: $theme-color-grey-dark;
+            color: $text-color-white-dim;
+            height: 5rem;
+            font-size: 1.8rem;
+            border: none;
+            border-radius: 0.5rem;
+
+            &:hover {
+                cursor: pointer;
+                color: $text-color-white;
+            }
+        }
     }
 }
