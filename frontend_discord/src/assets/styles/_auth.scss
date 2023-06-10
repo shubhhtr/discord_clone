@@ -1,50 +1,107 @@
 .login-wrapper {
-	background-color: rgba(80, 70, 224, 0.808);
-	height: 100vh;
-	width: 100vw;
+    background-color: $theme-color-blue;
+    height: 100vh;
+    width: 100vw;
 }
 
 .auth-box {
-	background-color: $theme-color-grey;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
-	height: 50vh;
-	width: 60vw;
-	border-radius: 1rem;
-	padding: 1rem;
-	color: $text-color-white-dim;
+    background-color: $theme-color-grey;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    // height: 60vh;
+    width: 60vw;
+    border-radius: 1rem;
+    // padding: 1rem;
+    padding: 4rem 2rem;
+    color: $text-color-white-dim;
 }
 
 .heading {
-	text-align: center;
+    text-align: center;
 
-	&-primary {
-		font-size: 2.5rem;
-		font-weight: 600;
-		display: block;
-		color: $text-color-white;
-	}
-	&-secondary {
-		font-size: 1.5rem;
-		font-weight: 400;
-	}
+    &-primary {
+        font-size: 2.6rem;
+        font-weight: 600;
+        display: block;
+        color: $text-color-white;
+    }
+    &-secondary {
+        font-size: 1.8rem;
+        font-weight: 400;
+    }
 }
 
 .login-form-wrapper {
-	font-size: 1.2rem;
-	font-weight: 700;
-	.text-input-box {
-		display: block;
-		height: 4rem;
-		width: 50%;
-		margin-top: 0.5rem;
-		font-size: 1.8rem;
-		color: $text-color-white;
-		background-color: $theme-color-grey-dark;
-		border: 0px;
-		padding-left: 1rem;
-		text-decoration: none;
-	}
+    margin-left: 2rem;
+    & .text-input-label {
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+
+    & .text-input-box {
+        display: block;
+        height: 5rem;
+        width: 50%;
+        margin-top: 0.5rem;
+        // margin-bottom: 2rem;
+        font-size: 1.9rem;
+        color: $text-color-white-dim;
+        background-color: $theme-color-grey-dark;
+        border: 0px;
+        padding-left: 1rem;
+        text-decoration: none;
+    }
+
+    & .forgot-password {
+        display: inline-block;
+        color: $theme-color-blue;
+        margin-top: 0;
+    }
+
+    & .login-button {
+        display: block;
+        width: 50%;
+        height: 5rem;
+        font-size: 1.9rem;
+        color: $text-color-white;
+        background-color: $theme-color-blue;
+        border: none;
+        border-radius: 0.4rem;
+        margin-top: 2rem;
+
+        &:hover {
+            background-color: $theme-color-blue-dark;
+            cursor: pointer;
+        }
+    }
+
+    & .wrong-cred {
+        color: $text-color-red;
+    }
+
+    & .warn-hidden {
+        color: $text-color-red;
+        font-weight: 200;
+    }
+
+    & .hidden {
+        display: none;
+    }
+}
+
+.registration-nav-button {
+    margin: 1rem 0 0 2rem;
+    &-sec {
+        color: $theme-color-blue;
+        margin-left: 0.5rem;
+    }
+}
+
+.router-link {
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
 }
