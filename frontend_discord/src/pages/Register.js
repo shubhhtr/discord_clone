@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SelectDatepicker } from 'react-select-datepicker';
+import axios from 'axios';
+
+import validateForm from '../utils/validateRegistration';
 
 const Register = () => {
     const [dob, setdob] = useState();
     const [cred, setCred] = useState({});
+    const [isInvalid, setIsInvalid] = useState({
+        email: false,
+        username: false,
+        password: false,
+    });
 
     const onChangeHandler = (e, k) => {
         setCred({
@@ -13,8 +21,21 @@ const Register = () => {
         });
     };
 
+    const registerNewUser = async () => {
+        try {
+            const result = await axios.post(
+                'http://localhost:8080/api/auth/signup',
+                cred
+            );
+            console.log(result);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const onSubmitHandler = () => {
-        console.log(cred);
+        validateForm(cred, setIsInvalid);
+        registerNewUser();
     };
 
     useEffect(() => {
@@ -32,12 +53,19 @@ const Register = () => {
                 </h1>
 
                 <div className='login-form-wrapper'>
-                    <label className='text-input-label wrong-cred'>
+                    <label
+                        className={
+                            isInvalid.email
+                                ? 'text-input-label wrong-cred'
+                                : 'text-input-label'
+                        }>
                         EMAIL
-                        <span className='wrong-cred warn-hidden'>
-                            {' '}
-                            - Not a well formed email address.
-                        </span>
+                        {isInvalid.email && (
+                            <span className='wrong-cred warn-hidden'>
+                                {' '}
+                                - Not a well formed email address.
+                            </span>
+                        )}
                     </label>
                     <input
                         className='text-input-box'
@@ -46,12 +74,19 @@ const Register = () => {
                             onChangeHandler(e, 'email');
                         }}
                     />
-                    <label className='text-input-label wrong-cred'>
+                    <label
+                        className={
+                            isInvalid.username
+                                ? 'text-input-label wrong-cred'
+                                : 'text-input-label'
+                        }>
                         USERNAME
-                        <span className='wrong-cred warn-hidden'>
-                            {' '}
-                            - Must be between 2 and 32 in length.
-                        </span>
+                        {isInvalid.username && (
+                            <span className='wrong-cred warn-hidden'>
+                                {' '}
+                                - Must be between 2 and 32 in length.
+                            </span>
+                        )}
                     </label>
                     <input
                         className='text-input-box'
@@ -60,12 +95,19 @@ const Register = () => {
                             onChangeHandler(e, 'username');
                         }}
                     />
-                    <label className='text-input-label wrong-cred'>
+                    <label
+                        className={
+                            isInvalid.password
+                                ? 'text-input-label wrong-cred'
+                                : 'text-input-label'
+                        }>
                         PASSWORD
-                        <span className='wrong-cred warn-hidden'>
-                            {' '}
-                            - Password is too weak or common to use.
-                        </span>
+                        {isInvalid.password && (
+                            <span className='wrong-cred warn-hidden'>
+                                {' '}
+                                - Password is too weak or common to use.
+                            </span>
+                        )}
                     </label>
                     <input
                         className='text-input-box'
@@ -85,12 +127,6 @@ const Register = () => {
                         className='dob-picker'
                     />
 
-                    <Link
-                        to={'#'}
-                        className='forgot-password router-link'>
-                        Forgot your password?
-                    </Link>
-
                     <button
                         className='login-button'
                         onClick={onSubmitHandler}>
@@ -103,6 +139,12 @@ const Register = () => {
                         className='registration-nav-button-sec router-link'>
                         Already have an account?
                     </Link>
+                </div>
+
+                <div className='tandc'>
+                    By registering, you agree to Discord's{' '}
+                    <span className='router-link'>Terms and Service</span> and
+                    <span className='router-link'> Privacy Policy</span>.
                 </div>
             </div>
         </div>

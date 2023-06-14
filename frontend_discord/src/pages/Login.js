@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Login = () => {
     const [cred, setCred] = useState({});
+    const [isInvalid, setIsInvalid] = useState(false);
+
+    const navigate = useNavigate();
 
     const onChangeHandler = (e, k) => {
         setCred({
@@ -11,8 +15,22 @@ const Login = () => {
         });
     };
 
-    const onSubmitHandler = () => {
-        console.log(cred);
+    const onSubmitHandler = async () => {
+        //console.log(cred);
+
+        try {
+            const result = await axios.post(
+                'http://localhost:8080/api/auth/login',
+                cred
+            );
+            setIsInvalid(false);
+            console.log(result?.data?.userDetails);
+
+            navigate('/dashboard');
+        } catch (err) {
+            setIsInvalid(true);
+            console.log(err);
+        }
     };
 
     return (
@@ -26,24 +44,38 @@ const Login = () => {
                 </h1>
 
                 <div className='login-form-wrapper'>
-                    <label className='text-input-label wrong-cred'>
+                    <label
+                        className={
+                            isInvalid
+                                ? 'text-input-label wrong-cred'
+                                : 'text-input-label'
+                        }>
                         EMAIL OR PHONE NUMBER
-                        <span className='wrong-cred warn-hidden'>
-                            {' '}
-                            - Login or password is invalid.
-                        </span>
+                        {isInvalid && (
+                            <span className='wrong-cred warn-hidden'>
+                                {' '}
+                                - Login or password is invalid.
+                            </span>
+                        )}
                     </label>
                     <input
                         className='text-input-box'
                         type='text'
                         onChange={(e) => onChangeHandler(e, 'email')}
                     />
-                    <label className='text-input-label wrong-cred'>
+                    <label
+                        className={
+                            isInvalid
+                                ? 'text-input-label wrong-cred'
+                                : 'text-input-label'
+                        }>
                         PASSWORD
-                        <span className='wrong-cred warn-hidden'>
-                            {' '}
-                            - Login or password is invalid.
-                        </span>
+                        {isInvalid && (
+                            <span className='wrong-cred warn-hidden'>
+                                {' '}
+                                - Login or password is invalid.
+                            </span>
+                        )}
                     </label>
                     <input
                         className='text-input-box'

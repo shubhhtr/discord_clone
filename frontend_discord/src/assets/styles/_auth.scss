@@ -94,13 +94,13 @@
 .registration-nav-button {
     margin: 1rem 0 0 2rem;
     &-sec {
-        color: $theme-color-blue;
         margin-left: 0.5rem;
     }
 }
 
 .router-link {
     text-decoration: none;
+    color: $theme-color-blue;
     &:hover {
         text-decoration: underline;
     }
@@ -131,4 +131,9 @@
             }
         }
     }
+}
+
+.tandc {
+    font-size: 1.2rem;
+    margin: 2rem 0 0 2rem;
 }
